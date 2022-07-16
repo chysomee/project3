@@ -151,7 +151,7 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys:
-              fingerprints: ["1d:ef:cd:b1:10:d6:98:09:d4:56:2f:94:a2:ec:75:1d"]
+          fingerprints: ["1d:ef:cd:b1:10:d6:98:09:d4:56:2f:94:a2:ec:75:1d"]
       - attach_workspace:
           at: ~/
       - run:
@@ -162,6 +162,7 @@ jobs:
       - run:
           name: Install AWS CLI v2
           command: |
+            apk update && apk add curl curl-dev bash1
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
             sudo ./aws/install
