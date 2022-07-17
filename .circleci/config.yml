@@ -1,4 +1,41 @@
 version: 2.1
+
+commands :
+
+  install_awscli:
+    description: Install AWS CLI v2
+    steps:
+      - run:
+          name: Install AWS CLI v2
+          command: |
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install
+
+
+  install_ansible:
+    description: Install Ansible
+    steps:
+      - run:
+          name: Install Ansible
+          command: |
+          sudo apt update
+          sudo apt install software-properties-common -y
+          sudo add-apt-repository --yes --update ppa:ansible/ansible
+          sudo apt install ansible -y
+
+  install_nodejs:
+    description: Install Node.js 13
+    steps:
+      - run:
+          name: Install Node.js 13
+          command: |
+            # Install Node.js LTS version as our base Node.js version
+            curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+            sudo apt install -y nodejs
+            #Use n version manager to use Node.js v13.8.0
+            sudo npm install --global n
+            sudo n 13.8.0
 orbs: 
   slack: circleci/slack@4.10.1
 jobs:
@@ -150,17 +187,19 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
+      - install_awscli
+      - install_ansible1
       - add_ssh_keys:
           fingerprints: ["1d:ef:cd:b1:10:d6:98:09:d4:56:2f:94:a2:ec:75:1d"]
       - attach_workspace:
           at: ~/
-      - run:
-          name: Install dependencies
-          command: |
+          #- run:
+          #name: Install dependencies
+          #command: |
            #install the dependencies needed for your playbook
-           apk add --update ansible
-           pip install awscli
-           aws --version
+           #apk add --update ansible
+           #pip install awscli
+           #aws --version
            #- run:
            #name: Install AWS CLI v2
            #command: |
