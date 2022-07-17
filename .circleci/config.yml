@@ -158,21 +158,23 @@ jobs:
           name: Install dependencies
           command: |
            #install the dependencies needed for your playbook
-           #apk add --update ansible
-      - run:
-          name: Install AWS CLI v2
-          command: |
-            apk update && apk add curl curl-dev bash
-            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            unzip awscliv2.zip
-            ./aws/install
+           apk add --update ansible
+           pip install awscli
+           aws --version
+           #- run:
+           #name: Install AWS CLI v2
+           #command: |
+           #apk update && apk add curl curl-dev bash
+           #curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+           #unzip awscliv2.zip
+           #./aws/install
             #- run:
             #name: Install Ansible
             #command: |
             #update
             #install -y python3 python3-pip
-            python3 -m pip install --upgrade pip
-            python3 -m pip install --user ansible
+            #python3 -m pip install --upgrade pip
+            #python3 -m pip install --user ansible
             #python3 -m pip install --upgrade pip
   
       - run:
