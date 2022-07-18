@@ -61,14 +61,14 @@ commands :
         name: Revert migrations
         when: on_fail
         command: |
-        SUCCESS=$(curl --insecure  https://kvdb.io/${KVDB_BUCKET}/migration_<< parameters.Workflow_ID >>)
+          SUCCESS=$(curl --insecure  https://kvdb.io/${KVDB_BUCKET}/migration_<< parameters.Workflow_ID >>)
         # code for reverting the database to initial state
-        if (( $SUCCESS == 1 ));
-        then
-          cd ~/project/backend
-          npm install
-          npm run migration:revert
-        fi
+          if (( $SUCCESS == 1 ));
+          then
+            cd ~/project/backend
+            npm install
+            npm run migration:revert
+          fi
 
 orbs: 
   slack: circleci/slack@4.10.1
