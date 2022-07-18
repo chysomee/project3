@@ -36,6 +36,7 @@ commands :
             #Use n version manager to use Node.js v13.8.0
             sudo npm install --global n
             sudo n 13.8.0
+
   destroy-environment:
     description: Destroy backend and front-end cloudformation stacks given a workflow ID.
     parameters:
@@ -50,6 +51,7 @@ commands :
             aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.Workflow_ID >>
             aws s3 rm s3://udapeople-<<parameters.Workflow_ID>> --recursive
             aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.Workflow_ID >>
+
   revert-migrations:
     description: Revert the last migrations
     parameters:
