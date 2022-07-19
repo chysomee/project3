@@ -266,17 +266,19 @@ jobs:
 
   run-migrations:
     docker:
-      - image: cimg/node:13.8.0
+      - image: cimg/python:3.10
     steps:
       - checkout
       - install_awscli
       - install_nodejs
+      - restore_cache:
+          keys: [backend-deps]
 
       - run:
           name: Run migrations #migrate database
           command: |
             cd backend
-            npm run build
+            npm install
             #curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
             #sudo apt-get install -y nodejs
             #sudo npm install -g n
@@ -294,6 +296,8 @@ jobs:
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
               curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
+            else
+              echo "No migrations are pending"
             fi
           no_output_timeout: 10m
 
