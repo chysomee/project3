@@ -273,7 +273,7 @@ jobs:
       - install_nodejs
 
       - run:
-          name: install node js and  Run migrations #migrate database
+          name: Run migrations #migrate database
           command: |
             cd backend
             #curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
