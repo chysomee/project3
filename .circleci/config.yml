@@ -270,15 +270,20 @@ jobs:
     steps:
       - checkout
       - install_awscli
+      - install_nodejs  
       - run:
-          name: Run migrations #migrate database
+          name:nstall node js and  Run migrations #migrate database
           command: |
             cd backend
-            npm install
-            npm audit fix #--audit-level=critical --force
-            npm audit fix # --audit-level=critical
-            npm audit fix --audit-level=critical --force
-            npm audit fix #--audit-level=critical --force
+            #curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+            #sudo apt-get install -y nodejs
+            #sudo npm install -g n
+            #sudo n 13.8.0
+            #npm install
+            #npm audit fix #--audit-level=critical --force
+            #npm audit fix # --audit-level=critical
+            #npm audit fix --audit-level=critical --force
+            #npm audit fix #--audit-level=critical --force
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
       - run:
