@@ -270,9 +270,10 @@ jobs:
     steps:
       - checkout
       - install_awscli
-      - install_nodejs  
+      - install_nodejs
+
       - run:
-          name:nstall node js and  Run migrations #migrate database
+          name: install node js and  Run migrations #migrate database
           command: |
             cd backend
             #curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
