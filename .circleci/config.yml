@@ -222,7 +222,7 @@ jobs:
 
   configure-infrastructure:
     docker:
-      - image: cimg/python:3.10
+      - image: cimg/ cimg/base:stable
     steps:
       - checkout
       - install_awscli
@@ -270,20 +270,20 @@ jobs:
     steps:
       - checkout
       - install_awscli
-      - install_nodejs
-      - restore_cache:
-          keys: [backend-build]
+        #- install_nodejs
+        #- restore_cache:
+        #  keys: [backend-build]
 
       - run:
           name: Run migrations #migrate database
           command: |
             cd backend
-            sudo npm install -g n
+            npm install
             npm audit fix
             #curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
             #sudo apt-get install -y nodejs
             #sudo npm install -g n
-            sudo n 13.8.0
+            #sudo n 13.8.0
             #npm cache clean --force
             #rm -rf node_modules
             #rm -rf package-lock.json
