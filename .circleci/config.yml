@@ -218,7 +218,7 @@ jobs:
           paths:
             - project/.circleci/ansible/inventory.txt
 
-              #- destroy-environment
+      - destroy-environment
 
   configure-infrastructure:
     docker:
@@ -262,7 +262,7 @@ jobs:
             ls -la
             ansible-playbook -i ~/project/.circleci/ansible/inventory.txt configure-server1.yml
 
-            #- destroy-environment
+      - destroy-environment
 
   run-migrations:
     docker:
@@ -270,16 +270,16 @@ jobs:
     steps:
       - checkout
       - install_awscli
-        #- install_nodejs
-        #- restore_cache:
-        #keys: [backend-build]
+      - install_nodejs
+      - restore_cache:
+          keys: [backend-build]
 
       - run:
           name: Run migrations #migrate database
           command: |
             cd backend
             npm install
-            npm audit fix
+            #npm audit fix
             #curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
             #sudo apt-get install -y nodejs
             #sudo npm install -g n
@@ -307,8 +307,8 @@ jobs:
             fi
           no_output_timeout: 10m
 
-          #- destroy-environment
-          #- revert-migrations
+      - destroy-environment
+      - revert-migrations
 
   deploy-frontend:
     docker:
@@ -341,8 +341,8 @@ jobs:
             tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
             
-            #- destroy-environment
-            #- revert-migrations
+      - destroy-environment
+      - revert-migrations
 
   deploy-backend:
     docker:
@@ -388,8 +388,8 @@ jobs:
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
 
-            #- destroy-environment
-            #- revert-migrations          
+      - destroy-environment
+      - revert-migrations          
 
 workflows:
   default:
