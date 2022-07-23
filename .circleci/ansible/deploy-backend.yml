@@ -35,5 +35,4 @@
     - setup:
 
   roles:
-    
     - deploy
