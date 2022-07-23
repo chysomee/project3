@@ -378,12 +378,11 @@ jobs:
             echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD >> "backend/.env"
             echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> "backend/.env"
             cat backend/.env
-                                                                                                                                     cd backend
+                                                                                                                                    cd backend
             ls -la
             npm run build
-            tar -czf artifact.tar.gz dist/* package*1
             cd ..
-            cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
+            tar -C backend -czvf artifact.tar.gz .
             pwd
             cd .circleci/ansible
             echo "Contents  of the inventory.txt file is ------"
