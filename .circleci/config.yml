@@ -285,7 +285,7 @@ jobs:
             #sudo apt-get install -y nodejs
             #sudo npm install -g n
             #sudo n 13.8.0
-            #npm cache clean --force
+            #npm cache clean --force#
             #rm -rf node_modules
             #rm -rf package-lock.json
             #npm install
